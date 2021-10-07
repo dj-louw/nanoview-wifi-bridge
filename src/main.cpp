@@ -35,6 +35,8 @@ void loop(void) {
       
     String payload = "TestMeasurement,tagKey=testTag counter=" + String(counter*counter++) + "\n";
 
+    TelnetStream.println(payload);
+
     Serial.println("posting: " + payload);
 
     // for(int i=0; i<bufferIndex; i++)

@@ -2,6 +2,7 @@
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include <AsyncElegantOTA.h>
+#include <TelnetStream.h>
 
 AsyncWebServer server(80);
 
@@ -27,6 +28,7 @@ void setupOTA(const char* wifissid, const char* wifipassword)
     });
 
     AsyncElegantOTA.begin(&server);    // Start ElegantOTA
+    TelnetStream.begin();
     server.begin();
   Serial.println("HTTP server started");
 };
