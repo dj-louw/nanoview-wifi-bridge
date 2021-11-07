@@ -80,6 +80,9 @@ const char index_html[] PROGMEM = R"rawliteral(
       <p><button id="button" class="button">Toggle</button></p>
     </div>
   </div>
+  <br>
+  <br>
+  <a href="/update">Update firmware</a>
 <script>
   var gateway = `ws://${window.location.hostname}/ws`;
   var websocket;

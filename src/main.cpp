@@ -11,6 +11,9 @@ void setup(void) {
   Serial.begin(115200);
   Serial.println("ESP32 Booting...");
 
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, LOW);
+
   setupOTA(WIFI_SSID, WIFI_PASSWORD);
 
 
@@ -49,6 +52,8 @@ void loop(void) {
 
     http.POST(payload);
     http.end();
+
+    OTALoopFunctions();
 
 
 }
