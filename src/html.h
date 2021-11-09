@@ -79,6 +79,10 @@ const char index_html[] PROGMEM = R"rawliteral(
       <p class="state">state: <span id="state">%STATE%</span></p>
       <p><button id="button" class="button">Toggle</button></p>
     </div>
+    <div class="card">
+      <h2>Raw Data</h2>
+      <p><span id="raw_data">%RAW_DATA%</span></p>
+    </div>
   </div>
   <br>
   <br>
@@ -105,11 +109,14 @@ const char index_html[] PROGMEM = R"rawliteral(
     var state;
     if (event.data == "1"){
       state = "ON";
-    }
-    else{
+      document.getElementById('state').innerHTML = state;
+    } else if (event.data == "0"){
       state = "OFF";
+      document.getElementById('state').innerHTML = state;
+    } else {
+      document.getElementById('raw_data').innerHTML = event.data;
     }
-    document.getElementById('state').innerHTML = state;
+    
   }
   function onLoad(event) {
     initWebSocket();
