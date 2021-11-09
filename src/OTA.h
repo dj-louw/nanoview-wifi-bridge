@@ -11,11 +11,11 @@ bool ledState = 0;
 const int ledPin = 2;
 
 // Create AsyncWebServer object on port 80
-AsyncWebServer server(80);
+AsyncWebServer aswserver(80);
 AsyncWebSocket ws("/ws");
 
-void notifyClients() {
-  ws.textAll(String(ledState));
+void notifyClients(String message) {
+  ws.textAll(message);
 }
 
 void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
@@ -24,12 +24,12 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
     data[len] = 0;
     if (strcmp((char*)data, "toggle") == 0) {
       ledState = !ledState;
-      notifyClients();
+      notifyClients(String(ledState));
     }
   }
 }
 
-void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type,
+void onEvent(AsyncWebSocket *aswserver, AsyncWebSocketClient *client, AwsEventType type,
              void *arg, uint8_t *data, size_t len) {
   switch (type) {
     case WS_EVT_CONNECT:
@@ -49,7 +49,7 @@ void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType 
 
 void initWebSocket() {
   ws.onEvent(onEvent);
-  server.addHandler(&ws);
+  aswserver.addHandler(&ws);
 }
 
 String processor(const String& var){
@@ -84,20 +84,20 @@ void setupOTA(const char* wifissid, const char* wifipassword)
 
     initWebSocket();
 
-    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
+    aswserver.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send_P(200, "text/html", index_html, processor);
     });
 
-    AsyncElegantOTA.begin(&server);    // Start ElegantOTA
+    AsyncElegantOTA.begin(&aswserver);    // Start ElegantOTA
     TelnetStream.begin();
-    server.begin();
+    aswserver.begin();
   Serial.println("HTTP server started");
 
 };
 
 void OTALoopFunctions()
 {
-  AsyncElegantOTA.loop();
+  //AsyncElegantOTA.loop();
   ws.cleanupClients();
   digitalWrite(ledPin, ledState);
 };
