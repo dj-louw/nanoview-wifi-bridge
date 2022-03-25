@@ -13,8 +13,10 @@ struct nv_firmware_version {
 
 void print_live_power(struct nv_live_power *nvlp) {
 
-    String payload_power = "Nanoview_Power_Measurement,type=live_power CH00="+String(nvlp->live_power_w[0])+",CH01="+String(nvlp->live_power_w[1])+",CH02="+String(nvlp->live_power_w[2])+",CH03="+String(nvlp->live_power_w[3])+",CH04="+String(nvlp->live_power_w[4])+",CH05="+String(nvlp->live_power_w[5])+",CH06="+String(nvlp->live_power_w[6])+",CH07="+String(nvlp->live_power_w[7])+",CH08="+String(nvlp->live_power_w[8])+",CH09="+String(nvlp->live_power_w[9])+",CH10="+String(nvlp->live_power_w[10])+",CH11="+String(nvlp->live_power_w[11])+",CH12="+String(nvlp->live_power_w[12])+",CH13="+String(nvlp->live_power_w[13])+",CH14="+String(nvlp->live_power_w[14])+",CH15="+String(nvlp->live_power_w[15]) + "\n";
-    String payload_volts = "Nanoview_Power_Measurement,type=voltage V=" + String(nvlp->mains_voltage_v) + "\n";
+    String ipaddr = WiFi.localIP().toString();
+
+    String payload_power = "Nanoview_Power_Measurement,source_ip="+ ipaddr +",type=live_power CH00="+String(nvlp->live_power_w[0])+",CH01="+String(nvlp->live_power_w[1])+",CH02="+String(nvlp->live_power_w[2])+",CH03="+String(nvlp->live_power_w[3])+",CH04="+String(nvlp->live_power_w[4])+",CH05="+String(nvlp->live_power_w[5])+",CH06="+String(nvlp->live_power_w[6])+",CH07="+String(nvlp->live_power_w[7])+",CH08="+String(nvlp->live_power_w[8])+",CH09="+String(nvlp->live_power_w[9])+",CH10="+String(nvlp->live_power_w[10])+",CH11="+String(nvlp->live_power_w[11])+",CH12="+String(nvlp->live_power_w[12])+",CH13="+String(nvlp->live_power_w[13])+",CH14="+String(nvlp->live_power_w[14])+",CH15="+String(nvlp->live_power_w[15]) + "\n";
+    String payload_volts = "Nanoview_Power_Measurement,source_ip="+ ipaddr +",type=voltage V=" + String(nvlp->mains_voltage_v) + "\n";
     // TelnetStream.println(payload_volts);
     // TelnetStream.println(payload_power);
 
