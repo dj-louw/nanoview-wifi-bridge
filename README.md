@@ -1,6 +1,8 @@
 # NanoView Wifi Bridge
 This project will create a wifi bridge intended to connect your Nanoview power monitor to the rest of the world.
 
+This project is heavily inspired by and based on the work done by Denvera at https://github.com/denvera/esp32-nanoview. All the serial wrangling and decoding is compliments of their efforts.
+
 ## Hardware
 This project makes use of an ESP32, that connects directly to the NanoHub serial line.
 
