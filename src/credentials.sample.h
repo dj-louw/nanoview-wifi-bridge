@@ -1,3 +1,5 @@
+// copy this file and remove the .sample from the filename. Edit below to match your setup
+
 const char* WIFI_SSID = "your wifi ssid";
 const char* WIFI_PASSWORD = "your wifi password";
 
